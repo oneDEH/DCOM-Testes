@@ -1,0 +1,12 @@
+from xmlrpc.client import ServerProxy
+
+# Endereço do servidor remoto (Computador B)
+endereco_servidor = 'http://localhost:8000'
+
+# Criando um proxy para o objeto somador remoto
+proxy = ServerProxy(endereco_servidor)
+
+# Chamando o método Somar no objeto remoto
+resultado = proxy.Somar(3, 4)
+
+print("Resultado da soma remota:", resultado)
