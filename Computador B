@@ -1,0 +1,24 @@
+from xmlrpc.server import SimpleXMLRPCServer
+from xmlrpc.server import SimpleXMLRPCRequestHandler
+
+class ObjetoSomadorB:
+    def Somar(self, a, b):
+        return a + b
+
+# Restringindo o acesso para garantir segurança básica
+class RequestHandler(SimpleXMLRPCRequestHandler):
+    rpc_paths = ('/RPC2',)
+
+# Endereço e porta para o servidor
+endereco = ('localhost', 8000)
+
+# Criando o servidor
+server = SimpleXMLRPCServer(endereco, requestHandler=RequestHandler)
+
+# Registrando o objeto somador
+server.register_instance(ObjetoSomadorB())
+
+print("Servidor iniciado em {}:{}".format(endereco[0], endereco[1]))
+
+# Iniciando o servidor
+server.serve_forever()
